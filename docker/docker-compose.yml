@@ -1,0 +1,18 @@
+name: backend-api
+
+services:
+  db:
+    image: postgres:17
+    container_name: backend-api-db
+    restart: always
+    environment:
+      POSTGRES_DB: backend_api
+      POSTGRES_USER: backend_user
+      POSTGRES_PASSWORD: secure_password_2026
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
