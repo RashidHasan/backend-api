@@ -1,6 +1,5 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-
 import { RequestContextHolder } from '../../shared/context/request-context-holder';
 import { FrontendException } from '../../shared/exceptions/frontend.exception';
 import {
@@ -31,6 +30,7 @@ export class AppRequestContextMiddleware implements NestMiddleware {
         client: AppClient.WEB,
         lang: langHeader,
         timezone: timezone,
+        req: req,
       };
 
       RequestContextHolder.runWithContext(context, () => {

@@ -1,3 +1,7 @@
 {
-
+  "RECORD_CREATED_SUCCESSFULLY": "Operation completed successfully.",
+  "PRODUCT_CREATED_SUCCESSFULLY": "Product added successfully.",
+  "PRODUCT_RETRIEVED_SUCCESSFULLY": "Data retrieved successfully.",
+  "PRODUCT_UPDATED_SUCCESSFULLY": "Product updated successfully.",
+  "PRODUCT_DELETED_SUCCESSFULLY": "Product deleted successfully."
 }

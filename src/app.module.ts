@@ -1,15 +1,16 @@
 import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
-import { APP_INTERCEPTOR, APP_GUARD, APP_FILTER } from '@nestjs/core';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './presentation/controllers/app.controller';
 import { AppService } from './application/services/app.service';
 import { TranslationService } from './application/services/translation.service';
-import { AppRequestContextMiddleware } from './infrastructure/middleware/app-request-context.middleware';
 import { ResponseTranslationInterceptor } from './infrastructure/interceptors/response-translation.interceptor';
-import { AuthGuard } from './infrastructure/guards/auth.guard';
-import { UnauthorizedExceptionFilter } from './infrastructure/filters/unauthorized.filter';
+import { AppRequestContextMiddleware } from './infrastructure/middleware/app-request-context.middleware';
+import { ProductService } from './application/services/product.service';
+import { ProductController } from './presentation/controllers/product.controller';
 import { databaseConfig } from './config/database.config';
+import { Product } from './domain/entities/product.entity';
 
 @Module({
   imports: [
@@ -18,24 +19,16 @@ import { databaseConfig } from './config/database.config';
       envFilePath: `.env.${process.env.NODE_ENV || 'dev'}`,
     }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) =>
-        databaseConfig(configService),
+      useFactory: databaseConfig,
     }),
+    TypeOrmModule.forFeature([Product]),
   ],
-  controllers: [AppController],
+  controllers: [AppController, ProductController],
   providers: [
     AppService,
     TranslationService,
-    {
-      provide: APP_GUARD,
-      useClass: AuthGuard,
-    },
-    {
-      provide: APP_FILTER,
-      useClass: UnauthorizedExceptionFilter,
-    },
+    ProductService,
     {
       provide: APP_INTERCEPTOR,
       useClass: ResponseTranslationInterceptor,

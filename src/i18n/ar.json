@@ -1,3 +1,7 @@
 {
-
+  "RECORD_CREATED_SUCCESSFULLY": "تم إجراء العملية بنجاح.",
+  "PRODUCT_CREATED_SUCCESSFULLY": "تم إضافة المنتج بنجاح.",
+  "PRODUCT_RETRIEVED_SUCCESSFULLY": "تم جلب البيانات بنجاح.",
+  "PRODUCT_UPDATED_SUCCESSFULLY": "تم تحديث بيانات المنتج بنجاح.",
+  "PRODUCT_DELETED_SUCCESSFULLY": "تم حذف المنتج بنجاح."
 }

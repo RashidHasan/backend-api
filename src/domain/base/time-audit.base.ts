@@ -1,4 +1,12 @@
+import { Column } from 'typeorm';
+
 export abstract class TimeAudit {
-  createDate?: Date | null = null;
-  updateDate?: Date | null = null;
+  @Column({ type: 'timestamptz', nullable: true })
+  createDate: Date | null = null;
+
+  @Column({ type: 'timestamptz', nullable: true })
+  updateDate: Date | null = null;
+
+  @Column({ default: false })
+  isDeleted: boolean = false;
 }

@@ -1,6 +1,10 @@
-export abstract class FullAudit {
-  createDate?: Date | null = null;
-  updateDate?: Date | null = null;
-  createById?: string | null = null;
-  updateById?: string | null = null;
+import { Column } from 'typeorm';
+import { TimeAudit } from './time-audit.base';
+
+export abstract class FullAudit extends TimeAudit {
+  @Column({ type: 'uuid', nullable: true })
+  createById: string | null = null;
+
+  @Column({ type: 'uuid', nullable: true })
+  updateById: string | null = null;
 }
