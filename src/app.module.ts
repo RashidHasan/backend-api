@@ -1,3 +1,4 @@
+// app.module.ts
 import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -11,6 +12,9 @@ import { ProductService } from './application/services/product.service';
 import { ProductController } from './presentation/controllers/product.controller';
 import { databaseConfig } from './config/database.config';
 import { Product } from './domain/entities/product.entity';
+import { Cost } from './domain/entities/cost.entity';
+import { CostService } from './application/services/cost.service';
+import { CostController } from './presentation/controllers/cost.controller';
 
 @Module({
   imports: [
@@ -22,13 +26,14 @@ import { Product } from './domain/entities/product.entity';
       inject: [ConfigService],
       useFactory: databaseConfig,
     }),
-    TypeOrmModule.forFeature([Product]),
+    TypeOrmModule.forFeature([Product, Cost]),
   ],
-  controllers: [AppController, ProductController],
+  controllers: [AppController, ProductController, CostController],
   providers: [
     AppService,
     TranslationService,
     ProductService,
+    CostService,
     {
       provide: APP_INTERCEPTOR,
       useClass: ResponseTranslationInterceptor,
