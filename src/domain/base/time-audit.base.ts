@@ -7,6 +7,6 @@ export abstract class TimeAudit {
   @Column({ type: 'timestamptz', nullable: true })
   updateDate: Date | null = null;
 
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   isDeleted: boolean = false;
 }
